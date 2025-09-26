@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskSmith - Connect with Talented Student Freelancers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .logo::before {
+            content: "🔧";
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ff6b35;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #e55a2b;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ff6b35, #ff8a5c);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #ff6b35;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .main-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .tab.active {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .tab:not(.active) {
+            background: #e9ecef;
+            color: #666;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 2rem;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .project-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-category.writing {
+            background: #ffe8e1;
+            color: #ff6b35;
+        }
+
+        .project-category.coding {
+            background: #e8f5e8;
+            color: #28a745;
+        }
+
+        .project-category.design {
+            background: #e8f4ff;
+            color: #007bff;
+        }
+
+        .project-category.tutoring {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #28a745;
+            color: white;
+            float: right;
+            margin-top: -0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .project-budget {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-view {
+            flex: 1;
+            background: #ff6b35;
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-apply {
+            flex: 1;
+            background: transparent;
+            color: #666;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .profile-header {
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-skills {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-rates {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .rate-box {
+            text-align: center;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            flex: 1;
+            margin: 0 0.5rem;
+        }
+
+        .rate-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.2rem;
+        }
+
+        .rate-value {
+            font-weight: 700;
+            color: #ff6b35;
+        }
+
+        .profile-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-verified {
+            background: #28a745;
+        }
+
+        .status-pending {
+            background: #ffc107;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Form Styles */
+        .form-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff6b35;
+        }
+
+        .dashboard-subtitle {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .stat-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .view-all-link {
+            color: #ff6b35;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .modal-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-budget {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .modal-due {
+            color: #666;
+        }
+
+        .client-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-actions .btn-primary {
+            flex: 1;
+            text-align: center;
+        }
+
+        .modal-actions .btn-secondary {
+            flex: 1;
+            text-align: center;
+            color: #666;
+            border: 1px solid #ddd;
+        }
+
+        /* Profile Modal Styles */
+        .profile-modal-content {
+            max-width: 600px;
+        }
+
+        .profile-university {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .skills-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .rates-section {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .rate-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            flex: 1;
+        }
+
+        .hire-section {
+            background: #28a745;
+            color: white;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">TaskSmith</div>
+        <nav class="nav-links">
+            <a href="#" onclick="showPage('browse')">Browse</a>
+            <a href="#" onclick="showPage('post-project')">Post Project</a>
+            <a href="#" onclick="showPage('profile')">My Profile</a>
+            <a href="#" onclick="showPage('dashboard')">Dashboard</a>
+            <a href="#" onclick="showPage('messages')">Messages</a>
+            <a href="#" onclick="showPage('reviews')">Reviews</a>
+            <a href="#" onclick="showModal('loginModal')">Log In</a>
+            <a href="#" onclick="showModal('signupModal')" class="btn-primary">Sign Up</a>
+        </nav>
+    </header>
+
+    <!-- Browse Page (Default) -->
+    <div id="browse-page" class="page">
+        <section class="hero">
+            <h1>Connect with Talented Student Freelancers</h1>
+            <p>TaskSmith bridges the gap between ambitious students and forward-thinking clients. Get quality work done while empowering young talent.</p>
+            <div class="hero-buttons">
+                <a href="#" onclick="showPage('projects')" class="btn-secondary">Browse Projects</a>
+                <a href="#" onclick="showPage('students')" class="btn-secondary">Find Talent</a>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('projects')">Projects</button>
+                <button class="tab" onclick="showTab('students')">Student Profiles</button>
+            </div>
+
+            <div class="filter-section">
+                <select class="filter-select">
+                    <option>All Categories</option>
+                    <option>Writing</option>
+                    <option>Coding</option>
+                    <option>Design</option>
+                    <option>Tutoring</option>
+                </select>
+            </div>
+
+            <!-- Projects Tab -->
+            <div id="projects-tab" class="tab-content">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-category writing">Writing</div>
+                        <div class="project-status">Open</div>
+                        <h3 class="project-title">Eloquent Article Series</h3>
+                        <p class="project-description">Write articles that engage and inform the audience.</p>
+                        <div class="project-meta">
+                            <span class="project-budget">Budget: $2000</span>
+                            <span>Due: Sep 30, 2025 3:30 pm</span>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #666;">Expression: project.client.name</p>
+                        <div class="project-actions">
+                            <button class="btn-view" onclick="showProjectModal('eloquent')">View Details</button>
+                            <button class="btn-apply">Apply Now</button>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-category coding">Coding</div>
+                        <div class="project-status">Open</div>
+                        <h3 class="project-title">Complex Web Application</h3>
+                        <p class="project-description">Build a functional web app using latest tech stacks.</p>
+                        <div class="project-meta">
+                            <span class="project-budget">Budget: $7000</span>
+                            <span>Due: Sep 28, 2025 5:29 pm</span>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #666;">Expression: project.client.name</p>
+                        <div class="project-actions">
+                            <button class="btn-view">View Details</button>
+                            <button class="btn-apply">Apply Now</button>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-category design">Design</div>
+                        <div class="project-status">Open</div>
+                        <h3 class="project-title">Innovative Logo Design</h3>
+                        <p class="project-description">Create a modern, memorable logo for a startup.</p>
+                        <div class="project-meta">
+                            <span class="project-budget">Budget: $1000</span>
+                            <span>Due: Oct 5, 2025 8:30 am</span>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #666;">Expression: project.client.name</p>
+                        <div class="project-actions">
+                            <button class="btn-view">View Details</button>
+                            <button class="btn-apply">Apply Now</button>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-category tutoring">Tutoring</div>
+                        <div class="project-status">Open</div>
+                        <h3 class="project-title">High-School Math Tutoring</h3>
+                        <p class="project-description">Provide math tutoring for advanced high school students.</p>
+                        <div class="project-meta">
+                            <span class="project-budget">Budget: $450</span>
+                            <span>Due: Sep 27, 2025 9:30 am</span>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #666;">Expression: project.client.name</p>
+                        <div class="project-actions">
+                            <button class="btn-view">View Details</button>
+                            <button class="btn-apply">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Students Tab -->
+            <div id="students-tab" class="tab-content hidden">
+                <div class="profiles-grid">
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profile-category writing">Writing</div>
+                            <h3 class="profile-name">studentprofile.user.name</h3>
+                            <p class="profile-skills">Copywriting, Blogging</p>
+                        </div>
+                        <div class="profile-rates">
+                            <div class="rate-box">
+                                <div class="rate-label">Hourly</div>
+                                <div class="rate-value">$30/hr</div>
+                            </div>
+                            <div class="rate-box">
+                                <div class="rate-label">Project</div>
+                                <div class="rate-value">$300</div>
+                            </div>
+                        </div>
+                        <div class="profile-status">
+                            <div class="status-indicator status-verified"></div>
+                            <span>Verified</span>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-view" onclick="showProfileModal('writer1')">View Profile</button>
+                            <button class="btn-apply">Hire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="project-category design">Design</div>
+                            <h3 class="profile-name">studentprofile.user.name</h3>
+                            <p class="profile-skills">Adobe Photoshop, Illustrator</p>
+                        </div>
+                        <div class="profile-rates">
+                            <div class="rate-box">
+                                <div class="rate-label">Hourly</div>
+                                <div class="rate-value">$50/hr</div>
+                            </div>
+                            <div class="rate-box">
+                                <div class="rate-label">Project</div>
+                                <div class="rate-value">$500</div>
+                            </div>
+                        </div>
+                        <div class="profile-status">
+                            <div class="status-indicator status-verified"></div>
+                            <span>Verified</span>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-view">View Profile</button>
+                            <button class="btn-apply">Hire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="project-category coding">Coding</div>
+                            <h3 class="profile-name">studentprofile.user.name</h3>
+                            <p class="profile-skills">Java, Python</p>
+                        </div>
+                        <div class="profile-rates">
+                            <div class="rate-box">
+                                <div class="rate-label">Hourly</div>
+                                <div class="rate-value">$60/hr</div>
+                            </div>
+                            <div class="rate-box">
+                                <div class="rate-label">Project</div>
+                                <div class="rate-value">$600</div>
+                            </div>
+                        </div>
+                        <div class="profile-status">
+                            <div class="status-indicator status-pending"></div>
+                            <span>Pending</span>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-view">View Profile</button>
+                            <button class="btn-apply">Hire Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Additional profile cards with similar structure -->
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="project-category writing">Writing</div>
+                            <h3 class="profile-name">studentprofile.user.name</h3>
+                            <p class="profile-skills">Mathematics, Physics</p>
+                        </div>
+                        <div class="profile-rates">
+                            <div class="rate-box">
+                                <div class="rate-label">Hourly</div>
+                                <div class="rate-value">$/hr</div>
+                            </div>
+                            <div class="rate-box">
+                                <div class="rate-label">Project</div>
+                                <div class="rate-value">$</div>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-view">View Profile</button>
+                            <button class="btn-apply">Hire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="project-category tutoring">Tutoring</div>
+                            <h3 class="profile-name">studentprofile.user.name</h3>
+                            <p class="profile-skills">Mathematics, Physics</p>
+                        </div>
+                        <div class="profile-rates">
+                            <div class="rate-box">
+                                <div class="rate-label">Hourly</div>
+                                <div class="rate-value">$40/hr</div>
+                            </div>
+                            <div class="rate-box">
+                                <div class="rate-label">Project</div>
+                                <div class="rate-value">$400</div>
+                            </div>
+                        </div>
+                        <div class="profile-status">
+                            <div class="status-indicator status-pending"></div>
+                            <span>Pending</span>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-view">View Profile</button>
+                            <button class="btn-apply">Hire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="project-category tutoring">Tutoring</div>
+                            <h3 class="profile-name">studentprofile.user.name</h3>
+                            <p class="profile-skills"></p>
+                        </div>
+                        <div class="profile-rates">
+                            <div class="rate-box">
+                                <div class="rate-label">Hourly</div>
+                                <div class="rate-value">$/hr</div>
+                            </div>
+                            <div class="rate-box">
+                                <div class="rate-label">Project</div>
+                                <div class="rate-value">$</div>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-view">View Profile</button>
+                            <button class="btn-apply">Hire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="project-category design">Design</div>
+                            <h3 class="profile-name">studentprofile.user.name</h3>
+                            <p class="profile-skills"></p>
+                        </div>
+                        <div class="profile-rates">
+                            <div class="rate-box">
+                                <div class="rate-label">Hourly</div>
+                                <div class="rate-value">$/hr</div>
+                            </div>
+                            <div class="rate-box">
+                                <div class="rate-label">Project</div>
+                                <div class="rate-value">$</div>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-view">View Profile</button>
+                            <button class="btn-apply">Hire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="project-category coding">Coding</div>
+                            <h3 class="profile-name">studentprofile.user.name</h3>
+                            <p class="profile-skills"></p>
+                        </div>
+                        <div class="profile-rates">
+                            <div class="rate-box">
+                                <div class="rate-label">Hourly</div>
+                                <div class="rate-value">$/hr</div>
+                            </div>
+                            <div class="rate-box">
+                                <div class="rate-label">Project</div>
+                                <div class="rate-value">$</div>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn-view">View Profile</button>
+                            <button class="btn-apply">Hire Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Post Project Page -->
+    <div id="post-project-page" class="page hidden">
+        <main class="main-content">
+            <div class="form-container">
+                <h2 class="modal-title">Post a New Project</h2>
+                <p style="color: #666; margin-bottom: 2rem;">Connect with talented student freelancers by posting your project details below</p>
+
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Project Title</label>
+                        <input type="text" class="form-input" placeholder="Enter a clear, descriptive title for your project">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Project Description</label>
+                        <textarea class="form-textarea" placeholder="Provide detailed information about your project, requirements, and expectations"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Budget ($)</label>
+                        <input type="number" class="form-input" placeholder="Enter your project budget">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Project Deadline</label>
+                        <input type="date" class="form-input" value="2025-09-26">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Project Category</label>
+                        <select class="form-select">
+                            <option>Select a category</option>
+                            <option>Writing</option>
+                            <option>Coding</option>
+                            <option>Design</option>
+                            <option>Tutoring</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; padding: 1rem;">Post Project</button>
+                </form>
+            </div>
+
+            <div class="section-card" style="margin-top: 2rem;">
+                <h3>Your Posted Projects</h3>
+                <p style="color: #666;">No projects posted yet.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profile-page" class="page hidden">
+        <section class="hero">
+            <h1>Build Your Profile</h1>
+            <p>Showcase your skills and start earning with quality projects from ambitious clients</p>
+        </section>
+
+        <main class="main-content">
+            <div class="form-container">
+                <h3>Student Profile</h3>
+
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Skills & Expertise</label>
+                        <textarea class="form-textarea" placeholder="List your key skills, technologies, and areas of expertise"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Student Email</label>
+                        <input type="email" class="form-input" placeholder="List your Email provided by your school">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Portfolio & Experience</label>
+                        <textarea class="form-textarea" placeholder="Describe your past projects, achievements, and relevant experience"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">University</label>
+                        <input type="text" class="form-input" placeholder="Enter your university name">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Primary Category</label>
+                        <select class="form-select">
+                            <option>Select your primary category</option>
+                            <option>Writing</option>
+                            <option>Coding</option>
+                            <option>Design</option>
+                            <option>Tutoring</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; padding: 1rem;">Save Profile</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page hidden">
+        <main class="main-content">
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="dashboard-title">Dashboard</h1>
+                    <p class="dashboard-subtitle">Monitor your projects, applications, and earnings</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn-primary">Post New Project</button>
+                    <button class="btn-secondary">Update Profile</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-title">Active Projects</div>
+                    <div class="stat-value">0</div>
+                    <div class="stat-description">Currently in progress</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-title">Total Earnings</div>
+                    <div class="stat-value">$0</div>
+                    <div class="stat-description">From completed projects</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-title">Average Rating</div>
+                    <div class="stat-value">0</div>
+                    <div class="stat-description">Based on client reviews</div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3 class="section-title">My Projects</h3>
+                        <a href="#" class="view-all-link">View All</a>
+                    </div>
+                    <p style="color: #666;">No active projects yet.</p>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3 class="section-title">My Applications</h3>
+                        <a href="#" class="view-all-link">View All</a>
+                    </div>
+                    <p style="color: #666;">No applications submitted yet.</p>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="section-title">Payment Status</h3>
+                    <a href="#" class="view-all-link">View All</a>
+                </div>
+                <p style="color: #666;">No payment history available.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Messages Page -->
+    <div id="messages-page" class="page hidden">
+        <section style="background: #f8f9fa; padding: 2rem; text-align: center;">
+            <h1>Project Communication</h1>
+            <p>Collaborate seamlessly with your team members through direct messaging on active projects</p>
+        </section>
+
+        <main class="main-content">
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; min-height: 500px;">
+                <div class="section-card">
+                    <h3>Your Projects</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">with Field not available</p>
+                    <p style="font-size: 0.9rem; color: #666;">Select a project to message about</p>
+                    <select class="form-select" style="margin-top: 1rem;">
+                        <option>Choose a project</option>
+                    </select>
+
+                    <h4 style="margin-top: 2rem; margin-bottom: 1rem;">Recent Conversations</h4>
+                    <p style="color: #666;">No recent conversations</p>
+                </div>
+
+                <div class="section-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
+                        <div>
+                            <p style="font-weight: 600;">Expression:</p>
+                            <p style="color: #666;">studentprofile.user.name</p>
+                        </div>
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #28a745;"></div>
+                    </div>
+
+                    <div style="flex: 1; margin-bottom: 1rem;">
+                        <p style="margin-bottom: 1rem; color: #666;">Type your message</p>
+                        <div style="display: flex; gap: 1rem;">
+                            <textarea class="form-textarea" placeholder="Write your message here..." style="flex: 1; min-height: 80px;"></textarea>
+                            <button class="btn-primary" style="height: fit-content; padding: 0.75rem 1.5rem;">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Reviews Page -->
+    <div id="reviews-page" class="page hidden">
+        <main class="main-content">
+            <div style="margin-bottom: 2rem;">
+                <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Reviews & Ratings</h1>
+                <p style="color: #666;">Rate completed projects and build your reputation on TaskSmith</p>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3 class="section-title">Projects Ready for Review</h3>
+                    <p style="color: #666;">No projects ready for review.</p>
+                </div>
+
+                <div class="section-card">
+                    <h3 class="section-title">Reviews Received</h3>
+                    <p style="color: #666;">No reviews received yet.</p>
+                </div>
+            </div>
+
+            <div class="section-card" style="margin-top: 2rem;">
+                <h3 class="section-title">Reviews Given</h3>
+                <p style="color: #666;">No reviews given yet.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #ff6b35; font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">Welcome Back</h2>
+            
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="Type here...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="Type here...">
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 1rem; margin-bottom: 1rem;">Log In</button>
+            </form>
+
+            <p style="text-align: center; color: #666;">
+                Don't have an account? <a href="#" onclick="closeModal('loginModal'); showModal('signupModal')" style="color: #333; text-decoration: none;">Sign up here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #ff6b35; font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">Join TaskSmith</h2>
+            
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Type here...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="Type here...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" placeholder="Type here...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">I'm joining as a</label>
+                    <select class="form-select">
+                        <option>Select your role</option>
+                        <option>Student Freelancer</option>
+                        <option>Client</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 1rem; margin-bottom: 1rem;">Create Account</button>
+            </form>
+
+            <p style="text-align: center; color: #666;">
+                Already have an account? <a href="#" onclick="closeModal('signupModal'); showModal('loginModal')" style="color: #333; text-decoration: none;">Log in here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('projectModal')">&times;</button>
+            <h2 class="modal-title">Eloquent Article Series</h2>
+            
+            <div class="project-category writing" style="margin-bottom: 1rem;">Writing</div>
+            <div class="project-status" style="margin-bottom: 1.5rem;">Open</div>
+            
+            <p style="margin-bottom: 1.5rem;">Write articles that engage and inform the audience.</p>
+            
+            <div class="modal-meta">
+                <span class="modal-budget">💰 Budget: $2000</span>
+                <span class="modal-due">📅 Due: Sep 30, 2025 3:30 pm</span>
+            </div>
+            
+            <div class="client-info">
+                <p style="font-weight: 600; margin-bottom: 0.5rem;">Expression: project.client.name</p>
+                <p style="color: #666;">Project Client</p>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-primary">Apply to Project</button>
+                <button class="btn-secondary">Contact Client</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Details Modal -->
+    <div id="profileModal" class="modal">
+        <div class="profile-modal-content modal-content">
+            <button class="modal-close" onclick="closeModal('profileModal')">&times;</button>
+            
+            <h2 class="modal-title">Expression: studentprofile.user.name</h2>
+            <p class="profile-university">Harvard University</p>
+            
+            <div class="project-category writing" style="margin-bottom: 1.5rem;">Writing</div>
+            
+            <div class="skills-section">
+                <h4 class="skills-title">Skills & Expertise</h4>
+                <p>Copywriting, Blogging</p>
+            </div>
+            
+            <div class="portfolio-section">
+                <h4 class="portfolio-title">Portfolio</h4>
+                <a href="#" class="portfolio-link">www.medium.com/wordsmith</a>
+            </div>
+            
+            <div class="rates-section">
+                <div class="rate-item">
+                    <div class="rate-label">Hourly Rate</div>
+                    <div class="rate-value" style="color: #ff6b35; font-weight: 700; font-size: 1.5rem;">$30/hr</div>
+                </div>
+                <div class="rate-item">
+                    <div class="rate-label">Project Rate</div>
+                    <div class="rate-value" style="color: #ff6b35; font-weight: 700; font-size: 1.5rem;">$300</div>
+                </div>
+            </div>
+            
+            <div class="hire-section">
+                <p style="font-weight: 600; margin-bottom: 0.5rem;">Ready to hire this talented student?</p>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-primary">Hire Student</button>
+                <button class="btn-secondary">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId + '-page');
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+            }
+        }
+
+        // Tab Navigation
+        function showTab(tabId) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(tabId + '-tab').classList.remove('hidden');
+        }
+
+        // Modal Functions
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        function showProjectModal(projectId) {
+            showModal('projectModal');
+        }
+
+        function showProfileModal(profileId) {
+            showModal('profileModal');
+        }
+
+        // Close modals when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('show');
+                }
+            });
+        });
+
+        // Initialize default view
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('browse');
+        });
+    </script>
+</body>
+</html>
+                        
