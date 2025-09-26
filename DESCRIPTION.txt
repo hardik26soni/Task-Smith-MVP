@@ -1,0 +1,15 @@
+Welcome to TaskSmith 👋  
+
+This project is an early MVP (minimum viable product) of our idea — a platform that helps students and young professionals connect with clients looking for affordable, reliable freelance work.  
+
+We are not here to compete with giant freelancing marketplaces. Instead, our goal is simple:  
+- Give students a chance to showcase their skills.  
+- Help clients discover fresh talent for their projects.  
+- Build a bridge between ambition and opportunity.  
+
+At this stage, what you see is only a working prototype. It doesn’t handle real payments, and it doesn’t store live project data yet. It’s just a way to test how the platform might look and feel.  
+
+If you’re reading this, we’d love for you to know that this is a passion project in progress. We’re learning, improving, and open to feedback. Every bit of support — whether that’s sharing ideas, pointing out issues, or just exploring the repo — means a lot.  
+
+Thanks for checking us out 🙏  
+– The TaskSmith Team  
